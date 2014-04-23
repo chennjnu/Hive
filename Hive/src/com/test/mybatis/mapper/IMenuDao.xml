@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.test.mybatis.mapper.IMenuDao">
+	<resultMap type="TdMRolemenu" id="rolemenuResult">
+		<result column="InfoId" property="infoId"/>
+		<result column="MenuNum" property="menuNum"/>
+		<result column="ParamValue" property="paramValue"/>
+		<result column="ParentId" property="parentId"/>
+		<result column="Depth" property="depth"/>
+		<association property="tdMMenus" column="menuCode" javaType="TdMMenus">
+			<result column="MenuCode" property="menuCode"/>
+			<result column="MenuName" property="menuName"/>
+			<result column="MenuUrl" property="menuUrl"/>
+			<result column="MenuDesc" property="menuDesc"/>
+		</association>
+		<association property="tdMRoles" column="roleCode" javaType="TdMRoles">
+			<result column="RoleCode" property="roleCode"/>
+			<result column="RoleName" property="roleName"/>
+			<result column="RoleDesc" property="roleDesc"/>
+		</association>
+	</resultMap>
+	
+	<select id="GetMenuByRoleCode" resultMap="rolemenuResult">
+		select rolemenu.InfoId as InfoId, 
+    		   rolemenu.MenuNum, 
+    		   rolemenu.ParamValue, 
+    		   rolemenu.ParentId, 
+    		   rolemenu.Depth,
+    		   menus.MenuCode,
+    		   menus.MenuName,
+    		   menus.MenuUrl,
+    		   menus.MenuDesc,
+    		   roles.RoleCode,
+    		   roles.RoleName,
+    		   roles.RoleDesc
+    		from Td_M_Rolemenu as rolemenu 
+    		join Td_M_Menus as menus on rolemenu.menuCode = menus.menuCode 
+    		join Td_M_Roles as roles on rolemenu.roleCode = roles.roleCode 
+    		where rolemenu.roleCode = #{roleCode}
+	</select>
+
+</mapper>

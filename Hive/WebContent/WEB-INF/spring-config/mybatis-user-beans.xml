@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="userdao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+  		<property name="mapperInterface" value="com.test.mybatis.mapper.IUserDao" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+		
+	<bean id="UserAction" class="com.test.user.action.UserAction" >
+		<property name="info" value="12341111"/>
+		<property name="userdao" ref="userdao"/>
+	</bean>
+	
+
+</beans>

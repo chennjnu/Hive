@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- 登录Action -->
+	<bean id="UserAction" class="com.test.user.action.UserAction" >
+		<property name="info" value="12341"/>
+	</bean>
+	
+	
+	<bean id="loginService" class="com.test.user.serviceImpl.LoginServiceImpl">
+	</bean>
+	
+	
+	<!-- <bean id="loginUser" class="com.test.user.model.User">
+		<property name="username" value="hi"></property>
+		<property name="password" value="12"></property>
+	</bean> -->
+	
+	<bean id="loginUser" class="com.test.user.model.User">
+		<property name="username">
+			<value>hi</value>
+		</property>
+		<property name="password" >
+			<value>11</value>
+		</property>
+	</bean>
+	
+	<bean id="userService" class="com.test.user.service.UserService">
+		<property name="userMapper" ref="userMapper"></property>
+	</bean>
+	
+	<bean id="loginAction" class="com.test.user.action.LoginAction" >  
+    	<property name="userService" ref="userService"></property>  
+    	<!-- <property name="user" ref="loginUser"></property> -->
+	</bean> 
+	
+	<!-- mybatis 设置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  		<property name="dataSource" ref="dataSource" />
+  		<property name="configLocation" value="/WEB-INF/mybatis.xml"></property>
+	</bean>
+	
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+  		<property name="mapperInterface" value="com.test.user.mapper.UserMapper" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!-- 定义数据源Bean，使用C3P0数据源实现 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<!-- 指定连接数据库的驱动 -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<!-- 指定连接数据库的URL -->
+		<property name="url" value="jdbc:mysql://localhost:3306/ci"/>
+		<!-- 指定连接数据库的用户名 -->
+		<property name="username" value="root"/>
+		<!-- 指定连接数据库的密码 -->
+		<property name="password" value="123456"/>		
+	</bean>
+</beans>

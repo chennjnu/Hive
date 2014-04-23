@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+    <typeAliases>  
+        <typeAlias alias="user" type="com.test.user.model.User"/>
+        <typeAlias alias="TdMRolemenu" type="com.test.user.model.TdMRolemenu"/>  
+        <typeAlias alias="TdMMenus" type="com.test.user.model.TdMMenus"/>  
+        <typeAlias alias="TdMRoles" type="com.test.user.model.TdMRoles"/>  
+    </typeAliases>  
+    <mappers>  
+        <mapper class="com.test.user.mapper.UserMapper" />  
+        <mapper resource="com/test/mybatis/mapper/IUserDao.xml" />
+        <mapper resource="com/test/mybatis/mapper/IMenuDao.xml" />
+    </mappers>  
+</configuration>

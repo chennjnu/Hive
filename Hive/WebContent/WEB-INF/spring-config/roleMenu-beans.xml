@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="menudao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+  		<property name="mapperInterface" value="com.test.mybatis.mapper.IMenuDao" />
+  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="roleMenuService" class="com.test.user.service.RoleMenuService">
+		<property name="menuDao" ref="menudao"/>
+	</bean>
+	
+	<bean id="roleMenuAction" class="com.test.user.action.RoleMenuAction">
+		<property name="roleMenuService" ref="roleMenuService"/>
+	</bean>
+</beans>
